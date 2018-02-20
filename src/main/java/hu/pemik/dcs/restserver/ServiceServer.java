@@ -18,6 +18,7 @@ public class ServiceServer {
     
     public ServiceServer(){
         final ResourceConfig rc = new ResourceConfig().packages("hu.pemik.dcs.restserver.endpoints");
+        rc.register(new ApplicationBinder());
         rc.register(JacksonFeature.class);
         this.server = GrizzlyHttpServerFactory.createHttpServer(URI.create(SERVICE_BASE_URI), rc);           
         System.out.println(String.format("Jersey app started with WADL available at "
