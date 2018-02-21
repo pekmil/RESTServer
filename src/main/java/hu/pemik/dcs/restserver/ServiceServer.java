@@ -1,7 +1,12 @@
 package hu.pemik.dcs.restserver;
 
+import hu.pemik.dcs.restserver.endpoints.WebSocketNotificationEndpoint;
+import java.io.IOException;
 import java.net.URI;
 import org.glassfish.grizzly.http.server.HttpServer;
+import org.glassfish.grizzly.http.server.NetworkListener;
+import org.glassfish.grizzly.websockets.WebSocketAddOn;
+import org.glassfish.grizzly.websockets.WebSocketEngine;
 import org.glassfish.jersey.grizzly2.httpserver.GrizzlyHttpServerFactory;
 import org.glassfish.jersey.jackson.JacksonFeature;
 import org.glassfish.jersey.server.ResourceConfig;
@@ -16,7 +21,7 @@ public class ServiceServer {
 
     private final HttpServer server;
     
-    public ServiceServer(){
+    public ServiceServer() throws IOException{
         final ResourceConfig rc = new ResourceConfig().packages("hu.pemik.dcs.restserver.endpoints");
         rc.register(new ApplicationBinder());
         rc.register(JacksonFeature.class);

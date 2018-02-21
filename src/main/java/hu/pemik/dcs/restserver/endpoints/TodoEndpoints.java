@@ -45,7 +45,8 @@ public class TodoEndpoints {
     @Consumes(MediaType.APPLICATION_JSON)
     public Response createTodo(@Context SecurityContext sc, Todo todo){
         this.service.create(todo, sc.getUserPrincipal().getName());
-        return Response.ok().build();
+        WebSocketNotificationEndpoint.sendNotification("Todo created!");
+        return Response.ok().status(Response.Status.CREATED).build();
     }
     
     @PUT
@@ -53,6 +54,7 @@ public class TodoEndpoints {
     @Consumes(MediaType.APPLICATION_JSON)
     public Response updateTodo(@Context SecurityContext sc, Todo todo){
         this.service.edit(todo, sc.getUserPrincipal().getName());
+        WebSocketNotificationEndpoint.sendNotification("Todo updated!");
         return Response.ok().build();
     }
     
@@ -60,6 +62,7 @@ public class TodoEndpoints {
     @Path("todo/{id}")
     public Response deleteTodo(@Context SecurityContext sc, @PathParam("id") String id){
         this.service.remove(id, sc.getUserPrincipal().getName());
+        WebSocketNotificationEndpoint.sendNotification("Todo deleted!");
         return Response.ok().build();
     }
     
