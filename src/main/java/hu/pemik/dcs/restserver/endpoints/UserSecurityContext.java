@@ -1,20 +1,19 @@
 package hu.pemik.dcs.restserver.endpoints;
 
-import java.security.Principal;
 import javax.ws.rs.core.SecurityContext;
+import java.security.Principal;
 
 /**
- *
  * @author pekmil
  */
 public class UserSecurityContext implements SecurityContext {
 
     private final UserPrincipal principal;
-    
-    public UserSecurityContext(String userName){
+
+    public UserSecurityContext(String userName) {
         this.principal = new UserPrincipal(userName);
     }
-    
+
     @Override
     public Principal getUserPrincipal() {
         return this.principal;
@@ -38,16 +37,16 @@ public class UserSecurityContext implements SecurityContext {
     class UserPrincipal implements Principal {
 
         private final String userName;
-        
-        public UserPrincipal(String userName){
+
+        public UserPrincipal(String userName) {
             this.userName = userName;
         }
-        
+
         @Override
         public String getName() {
             return this.userName;
         }
-        
+
     }
-    
+
 }

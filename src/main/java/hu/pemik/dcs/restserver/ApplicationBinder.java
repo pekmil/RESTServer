@@ -4,11 +4,11 @@ import hu.pemik.dcs.restserver.model.InMemoryTodoRepository;
 import hu.pemik.dcs.restserver.model.TodoRepository;
 import hu.pemik.dcs.restserver.service.DefaultTodoService;
 import hu.pemik.dcs.restserver.service.TodoService;
-import javax.inject.Singleton;
 import org.glassfish.hk2.utilities.binding.AbstractBinder;
 
+import javax.inject.Singleton;
+
 /**
- *
  * @author pekmil
  */
 public class ApplicationBinder extends AbstractBinder {

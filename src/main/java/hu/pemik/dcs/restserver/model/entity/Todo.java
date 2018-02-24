@@ -1,10 +1,10 @@
 package hu.pemik.dcs.restserver.model.entity;
 
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+
 import java.util.Objects;
 
 /**
- *
  * @author pekmil
  */
 @JsonIgnoreProperties(ignoreUnknown = true)
@@ -14,8 +14,9 @@ public class Todo {
     private String name;
     private String description;
     private String userName;
-    
-    public Todo(){}
+
+    public Todo() {
+    }
 
     public String getId() {
         return id;
@@ -73,5 +74,5 @@ public class Todo {
         }
         return true;
     }
-    
+
 }
