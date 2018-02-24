@@ -19,9 +19,9 @@ public class StringManipulationEndpoints {
     @Path("reverse/{stringToReverse}")
     @Produces(MediaType.TEXT_PLAIN)
     public Response reverse(@Context SecurityContext sc, @PathParam("stringToReverse") String stringToReverse) {
-        System.out.println("Try to reverse string:" + stringToReverse);
+        System.out.println("Try to reverse string: " + stringToReverse);
         String reversedString = new StringBuilder(stringToReverse).reverse().toString();
-        System.out.println("Reversed string:" + reversedString);
+        System.out.println("Reversed string: " + reversedString);
         return Response.ok(reversedString).build();
     }
 
