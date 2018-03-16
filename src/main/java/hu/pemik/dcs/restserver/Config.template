@@ -1,0 +1,5 @@
+package hu.pemik.dcs.restserver;
+
+public class Config {
+    final static String DATABASE_FILE = ".../RESTServer/db.ser";
+}
