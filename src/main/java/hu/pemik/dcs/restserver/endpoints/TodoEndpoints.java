@@ -29,8 +29,8 @@ public class TodoEndpoints {
     @GET
     @Path("todo/{id}")
     @Produces(MediaType.APPLICATION_JSON)
-    public Response getById(@Context SecurityContext sc, @PathParam("id") String id) {
-        return Response.ok(this.service.find(id, sc.getUserPrincipal().getName())).build();
+    public Response getById(@Context SecurityContext sc, @PathParam("id") int id) {
+        return Response.ok(this.service.find(id)).build();
     }
 
     @POST
@@ -53,8 +53,8 @@ public class TodoEndpoints {
 
     @DELETE
     @Path("todo/{id}")
-    public Response deleteTodo(@Context SecurityContext sc, @PathParam("id") String id) {
-        this.service.remove(id, sc.getUserPrincipal().getName());
+    public Response deleteTodo(@Context SecurityContext sc, @PathParam("id") int id) {
+        this.service.remove(id);
         WebSocketNotificationEndpoint.sendNotification("Todo deleted!");
         return Response.ok().build();
     }

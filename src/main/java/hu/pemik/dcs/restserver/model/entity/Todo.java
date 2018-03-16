@@ -1,6 +1,7 @@
 package hu.pemik.dcs.restserver.model.entity;
 
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+import hu.pemik.dcs.restserver.database.Model;
 
 import java.util.Objects;
 
@@ -8,21 +9,23 @@ import java.util.Objects;
  * @author pekmil
  */
 @JsonIgnoreProperties(ignoreUnknown = true)
-public class Todo {
+public class Todo extends Model {
 
-    private String id;
-    private String name;
-    private String description;
-    private String userName;
+    private static final long serialVersionUID = 10;
+
+    public int id;
+    public String name;
+    public String description;
+    public String userName;
 
     public Todo() {
     }
 
-    public String getId() {
+    public int getId() {
         return id;
     }
 
-    public void setId(String id) {
+    public void setId(int id) {
         this.id = id;
     }
 

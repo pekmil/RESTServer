@@ -1,10 +1,10 @@
 package hu.pemik.dcs.restserver.service;
 
+import hu.pemik.dcs.restserver.database.Repository;
 import hu.pemik.dcs.restserver.model.TodoRepository;
 import hu.pemik.dcs.restserver.model.entity.Todo;
 
 import javax.inject.Inject;
-import java.util.List;
 
 /**
  * @author pekmil
@@ -27,17 +27,17 @@ public class DefaultTodoService implements TodoService {
     }
 
     @Override
-    public void remove(String id, String userName) {
-        this.repository.remove(id, userName);
+    public void remove(int id) {
+        this.repository.remove(id);
     }
 
     @Override
-    public Todo find(String id, String userName) {
-        return this.repository.find(id, userName);
+    public Todo find(int id) {
+        return this.repository.find(id);
     }
 
     @Override
-    public List<Todo> findAll(String userName) {
+    public Repository<Todo> findAll(String userName) {
         return this.repository.findAll(userName);
     }
 
