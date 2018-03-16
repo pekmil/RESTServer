@@ -34,6 +34,7 @@ public class DatabaseTodoRepository implements TodoRepository {
 
         try {
             this.todos.insert(entity);
+            Database.query().save();
         } catch (Exception e) {
             System.out.println("Insert failed: " + e.getMessage());
         }
