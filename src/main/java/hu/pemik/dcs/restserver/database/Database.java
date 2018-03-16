@@ -1,5 +1,12 @@
 package hu.pemik.dcs.restserver.database;
 
+import hu.pemik.dcs.restserver.Config;
+import hu.pemik.dcs.restserver.Console;
+import hu.pemik.dcs.restserver.models.Customer;
+import hu.pemik.dcs.restserver.models.Product;
+import hu.pemik.dcs.restserver.models.User;
+import hu.pemik.dcs.restserver.models.Warehouse;
+
 import java.io.*;
 
 public class Database implements Serializable {
@@ -7,13 +14,16 @@ public class Database implements Serializable {
     /**
      * Location of the database file
      */
-    private static final String filePath = "/rendsz/RESTServer/db.ser";
+    private static final String filePath = "../../db.ser";
 
     /**
      * List of available repositories
      * These rows are like "table" definitions in a database
      */
-    // public Repository<Example> examples = new ArrayRepository<>();
+    public Repository<Warehouse> warehouses = new ArrayRepository<>();
+    public Repository<User> users = new ArrayRepository<>();
+    public Repository<Customer> customers = new ArrayRepository<>();
+    public Repository<Product> products = new ArrayRepository<>();
 
     private static final long serialVersionUID = 1;
 
@@ -56,14 +66,13 @@ public class Database implements Serializable {
      */
     private static void load() {
         try {
-            FileInputStream inputFile = new FileInputStream(Database.filePath);
+            FileInputStream inputFile = new FileInputStream(Config.DATABASE_FILE);
             ObjectInputStream stream = new ObjectInputStream(inputFile);
             db = (Database) stream.readObject();
             stream.close();
         } catch (Exception e) {
-            db = new Database();
-            db.save();
-            System.out.println("An Exception was thrown while loading the Database:\n " + e.getMessage());
+            Seeder.seed();
+            Console.info("An Exception was thrown while loading the Database:\n " + e.getMessage());
         }
     }
 
@@ -73,13 +82,17 @@ public class Database implements Serializable {
      */
     public void save() {
         try {
-            FileOutputStream outputFile = new FileOutputStream(Database.filePath);
+            FileOutputStream outputFile = new FileOutputStream(Config.DATABASE_FILE);
             ObjectOutputStream stream = new ObjectOutputStream(outputFile);
             stream.writeObject(db);
             stream.close();
         } catch (Exception e) {
             System.out.println("An Exception was thrown while saving the Database:\n " + e.getMessage());
         }
+    }
+
+    public void dump() {
+        System.out.print(db);
     }
 
     /**
@@ -89,7 +102,11 @@ public class Database implements Serializable {
      */
     @Override
     public String toString() {
-        return "Database toString...";
+        return Console.infoString("DATABASE:\n") +
+                Console.titleString("Users") + users + "\n" +
+                Console.titleString("Warehouses") + warehouses + "\n" +
+                Console.titleString("Customers") + customers + "\n" +
+                Console.titleString("Products") + products + "\n";
     }
 
 }

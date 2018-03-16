@@ -12,6 +12,8 @@ public abstract class Model implements Serializable {
      */
     public String[] uniqueKeys = {"id"};
 
+    public int id;
+
     /**
      * Get attribute type by its name
      * 

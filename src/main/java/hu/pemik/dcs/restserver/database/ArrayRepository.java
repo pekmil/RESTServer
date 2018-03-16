@@ -1,5 +1,7 @@
 package hu.pemik.dcs.restserver.database;
 
+import hu.pemik.dcs.restserver.Console;
+
 import java.io.Serializable;
 import java.sql.Timestamp;
 import java.util.ArrayList;
@@ -36,6 +38,8 @@ public class ArrayRepository<T extends Model> extends ArrayList<T> implements Se
             }
 
         }
+
+        model.id = this.count() + 1;
 
         return super.add(model);
 
@@ -412,7 +416,18 @@ public class ArrayRepository<T extends Model> extends ArrayList<T> implements Se
      */
     @Override
     public String toString() {
-        return "Array Repository...";
+        String result = "";
+
+        result += "\n" + Console.labelString("ArrayRepository") + ": ";
+        result += Console.numberString(this.count());
+
+        result += "\n" + Console.lineString() + "\n";
+        for (T obj : this) {
+            result += "  " + obj + ",\n";
+        }
+        result += Console.lineString() + "\n";
+
+        return result;
     }
 
 }
