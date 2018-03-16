@@ -18,7 +18,7 @@ public class Warehouse extends Model {
 
     @Override
     public String toString() {
-        return "Customer [ id=" + id + ", address='" + address + "', capacity=" + capacity + "]";
+        return "Warehouse [ id=" + id + ", address='" + address + "', capacity=" + capacity + "]";
     }
 
 }

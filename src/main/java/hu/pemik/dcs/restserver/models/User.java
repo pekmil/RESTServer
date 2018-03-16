@@ -20,7 +20,7 @@ public class User extends Model {
 
     @Override
     public String toString() {
-        return "Customer [ id=" + id + ", name='" + name + "', email='" + email + "', isAdmin=" + isAdmin + "]";
+        return "User [ id=" + id + ", name='" + name + "', email='" + email + "', isAdmin=" + isAdmin + "]";
     }
 
 }
