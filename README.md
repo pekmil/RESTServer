@@ -1,5 +1,4 @@
-# RESTServer
-Egyszerű példa RESTful szerver alkalmazás
+# Warehouse - Server
 
 Environment
 
@@ -11,4 +10,6 @@ Running
 
   1. Clone the repository: git clone https://github.com/pekmil/RESTServer.git
   2. Run: mvn clean install
-  3. Start generated JAR file (from the target directory): java -jar RESTServer-1.0-SNAPSHOT-jar-with-dependencies.jar
+  3. Create db.ser file in the project root.
+  4. Rename Config.template to Config.java and set the config values.
+  5. Start generated JAR file (from the target directory): java -jar RESTServer-1.0-SNAPSHOT-jar-with-dependencies.jar
