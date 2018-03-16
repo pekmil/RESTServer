@@ -4,9 +4,6 @@ import hu.pemik.dcs.restserver.endpoints.WebSocketNotificationEndpoint;
 import org.apache.commons.lang3.exception.ExceptionUtils;
 import org.glassfish.tyrus.server.Server;
 
-/**
- * @author pekmil
- */
 public class ApplicationMain {
 
     public static void main(String[] args) {

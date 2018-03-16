@@ -3,9 +3,6 @@ package hu.pemik.dcs.restserver.model;
 import hu.pemik.dcs.restserver.database.Repository;
 import hu.pemik.dcs.restserver.model.entity.Todo;
 
-/**
- * @author pekmil
- */
 public interface TodoRepository {
 
     void create(Todo entity);

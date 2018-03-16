@@ -6,9 +6,6 @@ import hu.pemik.dcs.restserver.model.entity.Todo;
 
 import javax.inject.Inject;
 
-/**
- * @author pekmil
- */
 public class DefaultTodoService implements TodoService {
 
     @Inject

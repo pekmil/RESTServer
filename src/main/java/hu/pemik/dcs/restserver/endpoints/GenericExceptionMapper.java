@@ -8,9 +8,6 @@ import javax.ws.rs.ext.Provider;
 import java.io.PrintWriter;
 import java.io.StringWriter;
 
-/**
- * @author pekmil
- */
 @Provider
 public class GenericExceptionMapper implements ExceptionMapper<Throwable> {
 

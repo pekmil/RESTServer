@@ -4,9 +4,6 @@ import hu.pemik.dcs.restserver.database.Database;
 import hu.pemik.dcs.restserver.database.Repository;
 import hu.pemik.dcs.restserver.model.entity.Todo;
 
-/**
- * @author pekmil
- */
 public class DatabaseTodoRepository implements TodoRepository {
 
     private Repository<Todo> todos;

@@ -8,9 +8,6 @@ import org.glassfish.jersey.server.ResourceConfig;
 import java.io.IOException;
 import java.net.URI;
 
-/**
- * @author pekmil
- */
 public class ServiceServer {
 
     private final static String SERVICE_BASE_URI = "http://localhost:33333/rest/";

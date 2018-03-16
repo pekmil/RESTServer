@@ -5,9 +5,6 @@ import hu.pemik.dcs.restserver.database.Model;
 
 import java.util.Objects;
 
-/**
- * @author pekmil
- */
 @JsonIgnoreProperties(ignoreUnknown = true)
 public class Todo extends Model {
 

@@ -3,9 +3,6 @@ package hu.pemik.dcs.restserver.endpoints;
 import javax.ws.rs.core.SecurityContext;
 import java.security.Principal;
 
-/**
- * @author pekmil
- */
 public class UserSecurityContext implements SecurityContext {
 
     private final UserPrincipal principal;

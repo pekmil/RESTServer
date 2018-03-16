@@ -8,9 +8,6 @@ import org.glassfish.hk2.utilities.binding.AbstractBinder;
 
 import javax.inject.Singleton;
 
-/**
- * @author pekmil
- */
 public class ApplicationBinder extends AbstractBinder {
 
     @Override
