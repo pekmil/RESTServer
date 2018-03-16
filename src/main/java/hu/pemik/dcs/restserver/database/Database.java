@@ -1,7 +1,5 @@
 package hu.pemik.dcs.restserver.database;
 
-import hu.pemik.dcs.restserver.model.entity.Todo;
-
 import java.io.*;
 
 public class Database implements Serializable {
@@ -15,7 +13,7 @@ public class Database implements Serializable {
      * List of available repositories
      * These rows are like "table" definitions in a database
      */
-    public Repository<Todo> todos = new ArrayRepository<>();
+    // public Repository<Example> examples = new ArrayRepository<>();
 
     private static final long serialVersionUID = 1;
 
@@ -71,7 +69,7 @@ public class Database implements Serializable {
 
     /**
      * Serialize the database instance variable and
-     * save the seriazlized object to Database.filePath
+     * save the serialized object to Database.filePath
      */
     public void save() {
         try {
@@ -85,7 +83,7 @@ public class Database implements Serializable {
     }
 
     /**
-     * Override toString to show User object atributes
+     * Override toString to show User object attributes
      *
      * @return String
      */

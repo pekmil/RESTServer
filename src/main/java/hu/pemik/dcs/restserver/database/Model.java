@@ -1,6 +1,5 @@
 package hu.pemik.dcs.restserver.database;
 
-
 import java.io.Serializable;
 import java.lang.reflect.Field;
 
