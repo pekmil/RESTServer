@@ -9,8 +9,6 @@ import java.net.URI;
 
 public class ServiceServer {
 
-    private final static String SERVICE_BASE_URI = "http://localhost:33333/rest/";
-
     private final HttpServer server;
 
     public ServiceServer() {
@@ -19,9 +17,9 @@ public class ServiceServer {
         rc.register(new ApplicationBinder());
         rc.register(JacksonFeature.class);
 
-        this.server = GrizzlyHttpServerFactory.createHttpServer(URI.create(SERVICE_BASE_URI), rc);
+        this.server = GrizzlyHttpServerFactory.createHttpServer(URI.create(Config.REST_SERVER_URL), rc);
 
-        System.out.println(String.format("\n\nServer started at: %s", SERVICE_BASE_URI));
+        Console.info(String.format("\n\nServer started at: %s", Config.REST_SERVER_URL));
     }
 
 }
