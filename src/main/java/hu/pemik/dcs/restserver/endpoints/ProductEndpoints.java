@@ -29,18 +29,36 @@ public class ProductEndpoints {
         Warehouse warehouse = db.warehouse;
 
         try {
-            db.dump();
-
             warehouse.storeProduct(product);
             db.products.insert(product);
             db.save();
-
-            db.dump();
         } catch (Exception e) {
             throw new BadRequestException("Couldn't save product.");
         }
 
-        return Response.ok().status(Response.Status.OK).build();
+        return Response.ok().build();
     }
+
+    @DELETE
+    @Path("product/{id}")
+    @Produces(MediaType.APPLICATION_JSON)
+    public Response destory(@Context SecurityContext sc, @PathParam("id") String id) {
+        Database db = Database.query();
+        Warehouse warehouse = db.warehouse;
+        int productId = Integer.parseInt(id);
+
+        try {
+            Product product = db.products.findOrFail(productId);
+
+            warehouse.removeProduct(product);
+            db.products.delete(product.id);
+            db.save();
+        } catch (Exception e) {
+            throw new BadRequestException("Couldn't remove product.");
+        }
+
+        return Response.ok().build();
+    }
+
 
 }

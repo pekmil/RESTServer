@@ -9,7 +9,7 @@ public class ApplicationMain {
 
         Database db = Database.connect();
 
-        if (args[0].equals("--reseed")) {
+        if (args.length > 0 && args[0].equals("--reseed")) {
             Seeder.reseed();
         }
 
