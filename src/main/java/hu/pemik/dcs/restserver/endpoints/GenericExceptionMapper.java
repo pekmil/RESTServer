@@ -1,5 +1,7 @@
 package hu.pemik.dcs.restserver.endpoints;
 
+import hu.pemik.dcs.restserver.Console;
+
 import javax.ws.rs.WebApplicationException;
 import javax.ws.rs.core.MediaType;
 import javax.ws.rs.core.Response;
@@ -13,6 +15,8 @@ public class GenericExceptionMapper implements ExceptionMapper<Throwable> {
 
     @Override
     public Response toResponse(Throwable ex) {
+        Console.action(ex.getMessage());
+
         ErrorMessage errorMessage = new ErrorMessage();
         setHttpStatus(ex, errorMessage);
         errorMessage.setMessage(ex.getMessage());
@@ -37,7 +41,9 @@ public class GenericExceptionMapper implements ExceptionMapper<Throwable> {
     class ErrorMessage {
 
         private int status;
+
         private String message;
+
         private String stackTrace;
 
         public ErrorMessage() {
