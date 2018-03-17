@@ -25,7 +25,7 @@ public class Seeder {
 
         try {
 
-            db.warehouses.insert(new Warehouse("Earth", 1000));
+            db.warehouse = new Warehouse("Earth", 1000);
 
             db.customers.insert(new Customer("Company1", 100));
 
@@ -50,7 +50,7 @@ public class Seeder {
 
         Database db = Database.connect();
 
-        db.warehouses = new ArrayRepository<>();
+        db.warehouse = null;
         db.users = new ArrayRepository<>();
         db.customers = new ArrayRepository<>();
         db.products = new ArrayRepository<>();

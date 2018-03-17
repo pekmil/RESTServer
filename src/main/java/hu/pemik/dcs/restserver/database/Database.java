@@ -12,15 +12,10 @@ import java.io.*;
 public class Database implements Serializable {
 
     /**
-     * Location of the database file
-     */
-    private static final String filePath = "../../db.ser";
-
-    /**
      * List of available repositories
      * These rows are like "table" definitions in a database
      */
-    public Repository<Warehouse> warehouses = new ArrayRepository<>();
+    public Warehouse warehouse; // Singleton...
     public Repository<User> users = new ArrayRepository<>();
     public Repository<Customer> customers = new ArrayRepository<>();
     public Repository<Product> products = new ArrayRepository<>();
@@ -103,8 +98,8 @@ public class Database implements Serializable {
     @Override
     public String toString() {
         return Console.infoString("DATABASE:\n") +
+                Console.titleString(warehouse.toString()) + "\n" +
                 Console.titleString("Users") + users + "\n" +
-                Console.titleString("Warehouses") + warehouses + "\n" +
                 Console.titleString("Customers") + customers + "\n" +
                 Console.titleString("Products") + products + "\n";
     }
