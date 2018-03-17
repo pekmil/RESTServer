@@ -8,8 +8,27 @@ public class Customer extends Model {
 
     public int capacity;
 
+    public Customer() {
+    }
+
     public Customer(String company, int capacity) {
         this.company = company;
+        this.capacity = capacity;
+    }
+
+    public String getCompany() {
+        return company;
+    }
+
+    public void setCompany(String company) {
+        this.company = company;
+    }
+
+    public int getCapacity() {
+        return capacity;
+    }
+
+    public void setCapacity(int capacity) {
         this.capacity = capacity;
     }
 
