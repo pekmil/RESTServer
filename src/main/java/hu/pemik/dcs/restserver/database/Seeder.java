@@ -2,7 +2,6 @@ package hu.pemik.dcs.restserver.database;
 
 import hu.pemik.dcs.restserver.Console;
 import hu.pemik.dcs.restserver.models.Customer;
-import hu.pemik.dcs.restserver.models.Product;
 import hu.pemik.dcs.restserver.models.User;
 import hu.pemik.dcs.restserver.models.Warehouse;
 
@@ -30,8 +29,6 @@ public class Seeder {
             db.customers.insert(new Customer("Company1", 100));
 
             db.users.insert(new User("tbence", "admin@warehouse.com", true));
-
-            db.products.insert(new Product("Tej", "1,5% UHT Tej", 100, true, 1, 1));
 
         } catch (Exception e) {
             Console.highlight("Failed to seed the database: \n" + e.getMessage());
