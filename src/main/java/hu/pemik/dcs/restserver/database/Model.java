@@ -14,10 +14,18 @@ public abstract class Model implements Serializable {
 
     public int id;
 
+    public int getId() {
+        return id;
+    }
+
+    public void setId(int id) {
+        this.id = id;
+    }
+
     /**
      * Get attribute type by its name
-     * 
-     * @param  attributeName [name of the attribute]
+     *
+     * @param attributeName [name of the attribute]
      * @return String
      */
     public String getAttributeType(String attributeName) {
@@ -39,7 +47,7 @@ public abstract class Model implements Serializable {
     /**
      * Get the current value of an attribute by its name
      *
-     * @param  attributeName [name fo the attribute]
+     * @param attributeName [name fo the attribute]
      * @return Object
      */
     public Object getAttribute(String attributeName) {

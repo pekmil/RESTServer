@@ -11,21 +11,24 @@ import java.io.*;
 
 public class Database implements Serializable {
 
-    /**
-     * List of available repositories
-     * These rows are like "table" definitions in a database
-     */
-    public Warehouse warehouse; // Singleton...
-    public Repository<User> users = new ArrayRepository<>();
-    public Repository<Customer> customers = new ArrayRepository<>();
-    public Repository<Product> products = new ArrayRepository<>();
-
     private static final long serialVersionUID = 1;
 
     /**
      * Singleton static instance variable
      */
     private static Database db = null;
+
+    /**
+     * List of available repositories
+     * These rows are like "table" definitions in a database
+     */
+    public Warehouse warehouse; // Singleton...
+
+    public Repository<User> users = new ArrayRepository<>();
+
+    public Repository<Customer> customers = new ArrayRepository<>();
+
+    public Repository<Product> products = new ArrayRepository<>();
 
     /**
      * Private constructor (part of the singleton pattern)
