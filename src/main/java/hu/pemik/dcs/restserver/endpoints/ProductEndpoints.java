@@ -1,6 +1,5 @@
 package hu.pemik.dcs.restserver.endpoints;
 
-import hu.pemik.dcs.restserver.Console;
 import hu.pemik.dcs.restserver.database.Database;
 import hu.pemik.dcs.restserver.models.Product;
 import hu.pemik.dcs.restserver.models.Warehouse;
@@ -14,15 +13,18 @@ import javax.ws.rs.core.SecurityContext;
 @Path("products")
 public class ProductEndpoints {
 
+    @GET
+    @Path("all")
+    @Produces(MediaType.APPLICATION_JSON)
+    public Response index(@Context SecurityContext sc) {
+        return Response.ok(Database.query().products).build();
+    }
+
     @POST
     @Path("product")
     @Consumes(MediaType.APPLICATION_JSON)
     @Produces(MediaType.APPLICATION_JSON)
     public Response store(@Context SecurityContext sc, Product product) {
-
-        Console.info("Try to store product...");
-        Console.highlight(product.toString());
-
         Database db = Database.query();
         Warehouse warehouse = db.warehouse;
 
