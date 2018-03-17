@@ -10,7 +10,7 @@ public class Product extends Model {
 
     public int quantity;
 
-    public boolean cooled = false;
+    public boolean cooled;
 
     public int customerId;
 
