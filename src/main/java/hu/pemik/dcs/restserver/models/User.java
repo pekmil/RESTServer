@@ -1,9 +1,11 @@
 package hu.pemik.dcs.restserver.models;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import hu.pemik.dcs.restserver.database.Model;
 
 public class User extends Model {
 
+    @JsonIgnore
     public String[] uniqueKeys = {"id", "email"};
 
     public String name;

@@ -1,5 +1,7 @@
 package hu.pemik.dcs.restserver.database;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
 import java.io.Serializable;
 import java.lang.reflect.Field;
 
@@ -10,6 +12,7 @@ public abstract class Model implements Serializable {
     /**
      * returns with unique keys on the model
      */
+    @JsonIgnore
     public String[] uniqueKeys = {"id"};
 
     public int id;
