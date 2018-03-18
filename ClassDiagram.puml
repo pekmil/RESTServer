@@ -1,0 +1,42 @@
+@startuml
+
+package "Database" {
+    Class ArrayRepository
+    Class Database  << (S,#FF7700) Singleton >>
+    Class Model
+    Interface Repository
+    Class Seeder
+
+    Repository ..> ArrayRepository
+    Repository "1" ..> "*" Model
+    ArrayRepository "1" *-- "*" Model
+    Database "1" *-- "*" ArrayRepository
+    Seeder --> Database : fills with data >
+}
+
+package "Endpoints" {
+    Class ProductEndpoits
+}
+
+package "Models" {
+    Class Customer
+    Class Product
+    Class User
+    Class Warehouse
+}
+
+Models --|> Model
+
+package "Main" {
+    Class ApplicationMain
+    Class Config
+    Class ServiceServer << (S,#FF7700) Singleton >>
+
+    ApplicationMain *--> ServiceServer : runs >
+}
+
+Database --> Config : uses >
+ApplicationMain --> Config : uses >
+ServiceServer --> Endpoints : handles >
+
+@enduml
