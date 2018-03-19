@@ -1,5 +1,6 @@
 package hu.pemik.dcs.restserver.endpoints;
 
+import hu.pemik.dcs.restserver.Console;
 import hu.pemik.dcs.restserver.database.Database;
 import hu.pemik.dcs.restserver.models.Product;
 import hu.pemik.dcs.restserver.models.Warehouse;
@@ -29,9 +30,12 @@ public class ProductEndpoints {
         Warehouse warehouse = db.warehouse;
 
         try {
-            warehouse.storeProduct(product);
             db.products.insert(product);
+            warehouse.storeProduct(product);
             db.save();
+
+            Console.info("Stored product: " + product.toString());
+            db.dump();
         } catch (Exception e) {
             throw new BadRequestException("Couldn't save product.");
         }
@@ -53,6 +57,9 @@ public class ProductEndpoints {
             warehouse.removeProduct(product);
             db.products.delete(product.id);
             db.save();
+
+            Console.info("Removed product: " + product.toString());
+            db.dump();
         } catch (Exception e) {
             throw new BadRequestException("Couldn't remove product.");
         }

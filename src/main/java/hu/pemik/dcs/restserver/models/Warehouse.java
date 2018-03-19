@@ -1,5 +1,6 @@
 package hu.pemik.dcs.restserver.models;
 
+import hu.pemik.dcs.restserver.Console;
 import hu.pemik.dcs.restserver.database.Model;
 
 import java.util.ArrayList;
@@ -39,14 +40,32 @@ public class Warehouse extends Model {
         // Then add it to the used locations list
         product.locationId = this.free.remove(0);
         this.used.add(product.locationId);
+
+        this.storage.set((product.locationId - 1), product.id);
+
+        Console.alert("FREE:" + this.free.toString());
+        Console.alert("USED:" + this.used.toString());
+        Console.alert("STORAGE:" + this.storage.toString());
     }
 
     public void removeProduct(Product product) {
         // Remove product location from the used list
         // Add it to the free list and assign 0 to product location
+        Console.alert("FREE:" + this.free.toString());
+        Console.alert("USED:" + this.used.toString());
+        Console.alert("STORAGE:" + this.storage.toString());
+
         this.used.remove(this.used.indexOf(product.locationId));
         this.free.add(product.locationId);
-        product.locationId = 0;
+        this.storage.set((product.locationId - 1), 0);
+
+        Console.alert("FREE:" + this.free.toString());
+        Console.alert("USED:" + this.used.toString());
+        Console.alert("STORAGE:" + this.storage.toString());
+
+
+        Console.info("PRODUCT:" + product.toString());
+        // product.locationId = 0;
     }
 
     @Override
