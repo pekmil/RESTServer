@@ -22,6 +22,14 @@ public class ArrayRepository<T extends Model> extends ArrayList<T> implements Se
     @Override
     public boolean insert(T model) throws Exception {
 
+        if (model.id == 0) {
+            if (this.count() > 0) {
+                model.id = this.get(this.size() - 1).id + 1;
+            } else {
+                model.id = 1;
+            }
+        }
+
         for (String uniqueKey : (String[]) model.getAttribute("uniqueKeys")) {
             String keyType = model.getAttributeType(uniqueKey);
 
@@ -38,8 +46,6 @@ public class ArrayRepository<T extends Model> extends ArrayList<T> implements Se
             }
 
         }
-
-        model.id = this.count() + 1;
 
         return super.add(model);
 
