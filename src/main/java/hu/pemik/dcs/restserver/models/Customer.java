@@ -1,10 +1,10 @@
 package hu.pemik.dcs.restserver.models;
 
-import hu.pemik.dcs.restserver.database.Model;
+import javax.ws.rs.HttpMethod;
+import java.util.ArrayList;
+import java.util.List;
 
-public class Customer extends Model {
-
-    public String name;
+public class Customer extends User {
 
     public String company;
 
@@ -13,17 +13,18 @@ public class Customer extends Model {
     public Customer() {
     }
 
-    public Customer(String company, int capacity) {
+    public Customer(String name, String email, String company, int capacity) {
+        super(name, email);
+        this.setRole(User.ROLE_CUSTOMER);
+
         this.company = company;
         this.capacity = capacity;
     }
 
-    public String getName() {
-        return name;
-    }
-
-    public void setName(String name) {
-        this.name = name;
+    public List<String> getAccessList() {
+        return new ArrayList<String>() {{
+            add(HttpMethod.GET + ": products/all");
+        }};
     }
 
     public String getCompany() {
@@ -44,7 +45,7 @@ public class Customer extends Model {
 
     @Override
     public String toString() {
-        return "Customer [ id=" + id + ", company='" + company + "', capacity=" + capacity + "]";
+        return "User [ id=" + id + ", name='" + name + "', email='" + email + "', role='" + role + "', company='" + company + "', capacity='" + capacity + "']";
     }
 
 }

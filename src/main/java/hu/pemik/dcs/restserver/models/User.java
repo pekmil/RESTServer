@@ -3,7 +3,15 @@ package hu.pemik.dcs.restserver.models;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import hu.pemik.dcs.restserver.database.Model;
 
-public class User extends Model {
+import java.util.List;
+
+abstract public class User extends Model {
+
+    public static final String ROLE_ADMIN = "admin";
+
+    public static final String ROLE_WORKER = "worker";
+
+    public static final String ROLE_CUSTOMER = "customer";
 
     @JsonIgnore
     public String[] uniqueKeys = {"id", "email"};
@@ -12,23 +20,28 @@ public class User extends Model {
 
     public String email;
 
-    public boolean isAdmin = false;
+    public String role = "guest";
 
     public User() {
     }
 
-    public User(String name, String email, boolean isAdmin) {
+    public User(String name, String email) {
         this.name = name;
         this.email = email;
-        this.isAdmin = isAdmin;
     }
 
-    public String[] getUniqueKeys() {
-        return uniqueKeys;
+    public abstract List<String> getAccessList();
+
+    public final boolean isAuthorized(String method, String path) {
+        return this.getAccessList().contains(method + ": " + path);
     }
 
-    public void setUniqueKeys(String[] uniqueKeys) {
-        this.uniqueKeys = uniqueKeys;
+    public String getRole() {
+        return role;
+    }
+
+    public void setRole(String role) {
+        this.role = role;
     }
 
     public String getName() {
@@ -47,17 +60,9 @@ public class User extends Model {
         this.email = email;
     }
 
-    public boolean isAdmin() {
-        return isAdmin;
-    }
-
-    public void setAdmin(boolean admin) {
-        isAdmin = admin;
-    }
-
     @Override
     public String toString() {
-        return "User [ id=" + id + ", name='" + name + "', email='" + email + "', isAdmin=" + isAdmin + "]";
+        return "User [ id=" + id + ", name='" + name + "', email='" + email + "', role=" + role + "]";
     }
 
 }
