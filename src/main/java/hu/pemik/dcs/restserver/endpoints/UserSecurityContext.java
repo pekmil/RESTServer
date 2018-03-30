@@ -1,5 +1,7 @@
 package hu.pemik.dcs.restserver.endpoints;
 
+import hu.pemik.dcs.restserver.models.User;
+
 import javax.ws.rs.core.SecurityContext;
 import java.security.Principal;
 
@@ -7,8 +9,8 @@ public class UserSecurityContext implements SecurityContext {
 
     private final UserPrincipal principal;
 
-    public UserSecurityContext(String userName) {
-        this.principal = new UserPrincipal(userName);
+    public UserSecurityContext(User user) {
+        this.principal = new UserPrincipal(user);
     }
 
     @Override
@@ -17,13 +19,13 @@ public class UserSecurityContext implements SecurityContext {
     }
 
     @Override
-    public boolean isUserInRole(String string) {
-        return true;
+    public boolean isUserInRole(String role) {
+        return this.principal.user.role.equals(User.ROLE_ADMIN) || this.principal.user.role.equals(role);
     }
 
     @Override
     public boolean isSecure() {
-        return false;
+        return true;
     }
 
     @Override
@@ -33,15 +35,19 @@ public class UserSecurityContext implements SecurityContext {
 
     class UserPrincipal implements Principal {
 
-        private final String userName;
+        private final User user;
 
-        public UserPrincipal(String userName) {
-            this.userName = userName;
+        public UserPrincipal(User user) {
+            this.user = user;
+        }
+
+        public User getUser() {
+            return this.user;
         }
 
         @Override
         public String getName() {
-            return this.userName;
+            return this.user.email;
         }
 
     }
