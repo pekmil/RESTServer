@@ -1,23 +1,23 @@
 package hu.pemik.dcs.restserver.endpoints;
 
-import java.io.PrintWriter;
-import java.io.StringWriter;
+import hu.pemik.dcs.restserver.Console;
+
 import javax.ws.rs.WebApplicationException;
 import javax.ws.rs.core.MediaType;
 import javax.ws.rs.core.Response;
 import javax.ws.rs.ext.ExceptionMapper;
 import javax.ws.rs.ext.Provider;
+import java.io.PrintWriter;
+import java.io.StringWriter;
 
-/**
- *
- * @author pekmil
- */
 @Provider
 public class GenericExceptionMapper implements ExceptionMapper<Throwable> {
 
     @Override
     public Response toResponse(Throwable ex) {
-        ErrorMessage errorMessage = new ErrorMessage();		
+        Console.action(ex.getMessage());
+
+        ErrorMessage errorMessage = new ErrorMessage();
         setHttpStatus(ex, errorMessage);
         errorMessage.setMessage(ex.getMessage());
         StringWriter errorStackTrace = new StringWriter();
@@ -25,26 +25,29 @@ public class GenericExceptionMapper implements ExceptionMapper<Throwable> {
         errorMessage.setStackTrace(errorStackTrace.toString());
 
         return Response.status(errorMessage.getStatus())
-                        .entity(errorMessage)
-                        .type(MediaType.APPLICATION_JSON)
-                        .build();
+                .entity(errorMessage)
+                .type(MediaType.APPLICATION_JSON)
+                .build();
     }
 
     private void setHttpStatus(Throwable ex, ErrorMessage errorMessage) {
-        if(ex instanceof WebApplicationException ) {
-                errorMessage.setStatus(((WebApplicationException)ex).getResponse().getStatus());
+        if (ex instanceof WebApplicationException) {
+            errorMessage.setStatus(((WebApplicationException) ex).getResponse().getStatus());
         } else {
-                errorMessage.setStatus(Response.Status.INTERNAL_SERVER_ERROR.getStatusCode()); //defaults to internal server error 500
+            errorMessage.setStatus(Response.Status.INTERNAL_SERVER_ERROR.getStatusCode()); //defaults to internal server error 500
         }
     }
-    
+
     class ErrorMessage {
 
         private int status;
+
         private String message;
+
         private String stackTrace;
 
-        public ErrorMessage(){}
+        public ErrorMessage() {
+        }
 
         public int getStatus() {
             return status;
@@ -71,5 +74,5 @@ public class GenericExceptionMapper implements ExceptionMapper<Throwable> {
         }
 
     }
-    
+
 }

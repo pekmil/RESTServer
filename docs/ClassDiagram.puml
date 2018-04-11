@@ -1,0 +1,136 @@
+@startuml
+
+package "Database" {
+    Interface Serializable
+
+    Class ArrayRepository{
+        + insert()
+        + insertIfNotExists()
+        + exists()
+        + delete()
+        + count()
+        + find()
+        + findOrFail()
+        + get()
+        + get()
+        + where()
+        + where()
+        + where()
+        + whereBetween()
+        + whereOverlaps()
+        + whereInFuture()
+        + sum()
+        + avg()
+        + orderBy()
+        + orderByDesc()
+    }
+    Class Database  << (S,#FF7700) Singleton >> {
+        - db
+        + connect()
+        + query()
+        + save()
+        + dump()
+    }
+    Class Model {
+        + uniqueKeys
+        + id
+
+    }
+    Interface Repository {
+        + insert()
+        + insertIfNotExists()
+        + exists()
+        + delete()
+        + count()
+        + find()
+        + findOrFail()
+        + get()
+        + get()
+        + where()
+        + where()
+        + where()
+        + whereBetween()
+        + whereOverlaps()
+        + whereInFuture()
+        + sum()
+        + avg()
+        + orderBy()
+        + orderByDesc()
+    }
+    Class Seeder << (S,#777777) Static >> {
+        + seed()
+        + truncate()
+        + reseed()
+    }
+
+    Repository ..> ArrayRepository
+    Repository "1" ..> "*" Model
+    ArrayRepository "1" *-- "*" Model
+    Database "1" *-- "*" ArrayRepository
+    Seeder --> Database : fills with data >
+
+    Serializable ..> Database
+    Serializable ..> ArrayRepository
+    Serializable ..> Model
+}
+
+package "Endpoints" {
+    Class ProductEndpoits {
+        + index()
+        + store()
+        + destroy()
+    }
+}
+
+package "Models" {
+    Class Customer {
+        + name
+        + capacity
+        + companyName
+    }
+    Class Product {
+        + name
+        + description
+        + quantity
+        + cooled
+    }
+    Class User {
+        + name
+        + email
+        + isAdmin
+    }
+    Class Warehouse {
+        + address
+        + capacity
+        + storage
+        + storeProduct()
+        + removeProduct()
+    }
+
+    Product "*" o-- "1" Customer
+    Warehouse "1" o--o "*" Product
+}
+
+Models --|> Model
+
+package "Main" {
+    Class ApplicationMain {
+        + main()
+    }
+    Class Config << (S,#777777) Static >> {
+        + DATABASE_FILE
+        + REST_SERVER_URL
+    }
+    Class ServiceServer << (S,#FF7700) Singleton >> {
+        - server
+    }
+
+    ApplicationMain *--> ServiceServer : runs >
+}
+
+Database ..> Config : uses >
+ApplicationMain ..> Config : uses >
+ApplicationMain --> Database
+ServiceServer --> Endpoints : handles >
+
+@enduml

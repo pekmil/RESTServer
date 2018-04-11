@@ -1,34 +1,21 @@
 package hu.pemik.dcs.restserver;
 
-import hu.pemik.dcs.restserver.endpoints.WebSocketNotificationEndpoint;
-import java.io.BufferedReader;
-import java.io.InputStreamReader;
-import org.apache.commons.lang3.exception.ExceptionUtils;
-import org.glassfish.tyrus.server.Server;
+import hu.pemik.dcs.restserver.database.Database;
+import hu.pemik.dcs.restserver.database.Seeder;
 
-/**
- *
- * @author pekmil
- */
 public class ApplicationMain {
 
     public static void main(String[] args) {
-        try{
-            ServiceServer server = new ServiceServer();
-            runWebSocketServer();
+
+        Database db = Database.connect();
+
+        if (args.length > 0 && args[0].equals("--reseed")) {
+            Seeder.reseed();
         }
-        catch(Throwable t) {
-            System.err.println("Unhandled runtime exception:\n" + ExceptionUtils.getStackTrace(t));
-        }
+
+        db.dump();
+
+        ServiceServer server = new ServiceServer();
     }
-    
-    public static void runWebSocketServer() {
-        Server server = new Server("localhost", 8025, "/ws", null, WebSocketNotificationEndpoint.class);
-        try {
-            server.start();
-        } catch (Exception e) {
-            throw new RuntimeException(e);
-        }
-    }
-    
+
 }
