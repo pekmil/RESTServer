@@ -39,6 +39,10 @@ public class AuthenticationFilter implements ContainerRequestFilter {
                 path = parts[0] + "/" + parts[1];
                 String method = crc.getMethod();
 
+                if (method.equals(HttpMethod.GET) && path.equals("auth/login")) {
+                    return;
+                }
+
                 if (!user.isAuthorized(method, path)) {
                     throw new RuntimeException("Unauthorized to access: " + method + ": " + path);
                 }
@@ -47,7 +51,7 @@ public class AuthenticationFilter implements ContainerRequestFilter {
                 throw new IllegalStateException("No authorization header present!");
             }
         } catch (Exception ex) {
-            Console.alert("AUTH WARNING:" + ex.getMessage());
+            Console.alert("AUTH WARNING: " + ex.getMessage());
             crc.abortWith(Response.status(Response.Status.UNAUTHORIZED).build());
         }
     }
