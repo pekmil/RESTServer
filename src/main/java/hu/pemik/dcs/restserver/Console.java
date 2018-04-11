@@ -1,4 +1,4 @@
-package hu.pemik.dcs.restserver;
+package hu.pemik.dcs.restserver.;
 
 import java.io.BufferedReader;
 import java.io.InputStreamReader;
@@ -17,19 +17,19 @@ public class Console {
 
         colorMap.put("reset", 0);
 
-        colorMap.put("header", 32);
-        colorMap.put("footer", 32);
+        colorMap.put("header", 92);
+        colorMap.put("footer", 92);
 
-        colorMap.put("title", 32);
-        colorMap.put("label", 34);
-        colorMap.put("info", 36);
-        colorMap.put("highlight", 33);
-        colorMap.put("number", 35);
+        colorMap.put("title", 92);
+        colorMap.put("label", 94);
+        colorMap.put("info", 96);
+        colorMap.put("highlight", 93);
+        colorMap.put("number", 95);
 
-        colorMap.put("alert", 31);
+        colorMap.put("alert", 91);
 
-        colorMap.put("action", 31);
-        colorMap.put("input", 31);
+        colorMap.put("action", 91);
+        colorMap.put("input", 91);
 
         colorMap.put("gray", 2);
 
@@ -495,11 +495,7 @@ public class Console {
         String answer = in.nextLine().trim().toLowerCase();
         System.out.print(resetString());
 
-        if (answer.equals("y")) {
-            return true;
-        } else {
-            return false;
-        }
+        return answer.equals("y");
 
     }
 
@@ -510,6 +506,14 @@ public class Console {
      */
     public static boolean confirm() {
         return confirm("Are you sure? (y/n) ");
+    }
+
+    public static void handleException(Exception e) {
+        Console.alert(e.getMessage());
+        Console.info("Trace:");
+        e.printStackTrace(System.out);
+        Console.line();
+        Console.waitForEnter();
     }
 
 }
